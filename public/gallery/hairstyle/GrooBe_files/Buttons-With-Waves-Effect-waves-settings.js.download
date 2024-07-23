@@ -1,0 +1,2 @@
+$(document).ready(function(){let waves={init:()=>{Waves.attach('.btn-close, .btn, .dropdown-item, .nav-item',['waves-button']);Waves.init()}}
+waves.init()})

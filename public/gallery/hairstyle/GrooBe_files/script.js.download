@@ -1,0 +1,26 @@
+function showAllService(){var moreText=document.getElementById("service-card-toggle");var btnText=document.getElementById("show-service-card");moreText.classList.toggle("service-card-hide");if(!moreText.classList.contains("service-card-hide")){btnText.innerText="Show Less Services"}else{btnText.innerText="Show More Services"}}
+function showSuccessMessage2(event){event.preventDefault();var formDiv=document.getElementById("success-message-2-form");var msgDiv=document.getElementById("success-message-2-msg");formDiv.classList.add("service-card-hide");msgDiv.classList.remove("service-card-hide")}
+function resetSuccess(){var formDiv=document.getElementById("success-message-2-form");var msgDiv=document.getElementById("success-message-2-msg");msgDiv.classList.add("service-card-hide");formDiv.classList.remove("service-card-hide")}
+async function submitBYSNForm1(event){event.preventDefault();const form=document.getElementById('BYSNForm1');const formData=new FormData(form);let arr=[...formData];let service_arr=arr.slice(7,-1);let services=service_arr.map((val)=>val[1]);let msg_arr=arr.slice(-1)
+let msg=msg_arr[0][1];let hours=Number(arr[4][1]);let minutes=Number(arr[5][1]);let AMPM=arr[6][1];if(AMPM=="PM"&&hours<12)hours=hours+12;if(AMPM=="AM"&&hours==12)hours=hours-12;var sHours=hours.toString();var sMinutes=minutes.toString();if(hours<10)sHours="0"+sHours;if(minutes<10)sMinutes="0"+sMinutes;let time=`${sHours}:${sMinutes}`;let booking={name:arr[0][1],phone:arr[1][1],gender:arr[2][1],date:arr[3][1],time,service:services.join(' '),message:msg}
+let options={method:"POST",headers:{"Content-type":"application/json"},body:JSON.stringify(booking),}
+let p=await fetch('https://groobe-landing.onrender.com/form-data',options)
+let response=await p.json()
+if(response.staus){document.getElementById("BYSNForm1").reset();$('#bysn-form1-services').selectpicker('val',[])}else{showToast(response.message)}}
+async function submitBYSNForm2(event){event.preventDefault();const form=document.getElementById('BYSNForm2');const formData=new FormData(form);let arr=[...formData];let service_arr=arr.slice(7,-1);let services=service_arr.map((val)=>val[1]);let msg_arr=arr.slice(-1)
+let msg=msg_arr[0][1];let hours=Number(arr[4][1]);let minutes=Number(arr[5][1]);let AMPM=arr[6][1];if(AMPM=="PM"&&hours<12)hours=hours+12;if(AMPM=="AM"&&hours==12)hours=hours-12;var sHours=hours.toString();var sMinutes=minutes.toString();if(hours<10)sHours="0"+sHours;if(minutes<10)sMinutes="0"+sMinutes;let time=`${sHours}:${sMinutes}`;let booking={name:arr[0][1],phone:arr[1][1],gender:arr[2][1],date:arr[3][1],time,service:services.join(' '),message:msg}
+let options={method:"POST",headers:{"Content-type":"application/json"},body:JSON.stringify(booking),}
+let p=await fetch('https://groobe-landing.onrender.com/form-data',options)
+let response=await p.json()
+if(response.staus){document.getElementById("BYSNForm2").reset();$('#bysn-form2-services').selectpicker('val',[])}else{showToast(response.message)}}
+async function submitBYSNForm2(event){event.preventDefault();const form=document.getElementById('BYSNForm2');const formData=new FormData(form);let arr=[...formData];let service_arr=arr.slice(7,-1);let services=service_arr.map((val)=>val[1]);let msg_arr=arr.slice(-1)
+let msg=msg_arr[0][1];let hours=Number(arr[4][1]);let minutes=Number(arr[5][1]);let AMPM=arr[6][1];if(AMPM=="PM"&&hours<12)hours=hours+12;if(AMPM=="AM"&&hours==12)hours=hours-12;var sHours=hours.toString();var sMinutes=minutes.toString();if(hours<10)sHours="0"+sHours;if(minutes<10)sMinutes="0"+sMinutes;let time=`${sHours}:${sMinutes}`;let booking={name:arr[0][1],phone:arr[1][1],gender:arr[2][1],date:arr[3][1],time,service:services.join(' '),message:msg}
+let options={method:"POST",headers:{"Content-type":"application/json"},body:JSON.stringify(booking),}
+let p=await fetch('https://groobe-landing.onrender.com/form-data',options)
+let response=await p.json()
+if(response.staus){document.getElementById("BYSNForm2").reset();$('#bysn-form2-services').selectpicker('val',[]);showSuccessMessage2(event)}else{showToast(response.message)}}
+async function contactUsForm(event){event.preventDefault();const form=document.getElementById('contact_form');const formData=new FormData(form);let arr=[...formData];let queryMsg={name:arr[0][1],email:arr[1][1],phone:arr[2][1],message:arr[3][1]}
+let options={method:"POST",headers:{"Content-type":"application/json"},body:JSON.stringify(queryMsg),}
+let p=await fetch('https://groobe-landing.onrender.com/contact-data',options)
+let response=await p.json();showToast(response.message)}
+function showToast(message){document.getElementById("toastText").innerText=message;const toast=new bootstrap.Toast(document.getElementById("toastMessage"));toast.show()}
